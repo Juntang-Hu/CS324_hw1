@@ -8,7 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics; 
 namespace 視窗二CS324_hw1
 {
     public partial class Form1 : Form
@@ -147,6 +147,9 @@ namespace 視窗二CS324_hw1
             textBox3.Text = "";
             textBox4.Text = "";
             textBox5.Text = "";
+            TextBox[] tb = { textBox1, textBox2, textBox3, textBox4 };
+            for (int i = 0; i < 4; i++)
+                tb[i].BackColor = Color.White;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -181,6 +184,20 @@ namespace 視窗二CS324_hw1
                 // 如果不是數字也不是控制鍵，就攔截掉 (Handled = true)
                 e.Handled = true;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string url = "https://www.cathaybk.com.tw/cathaybk/personal/loan/reserve/mortgage/";
+
+            // 使用 ProcessStartInfo 來確保在 .NET Core / .NET 5+ 以上版本能正常運作
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true // 這行非常重要！告訴系統使用作業系統的外殼程序來開啟
+            };
+
+            Process.Start(psi);
         }
     }
 }

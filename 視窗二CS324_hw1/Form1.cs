@@ -14,11 +14,11 @@ namespace 視窗二CS324_hw1
     public partial class Form1 : Form
     {
         bool isRate = true;
-        int house_p = 0;
+        double house_p = 0;
         double down_payment = 0;
         double interest_rate = 0;
-        int loan_term = 0;
-        int grace_period = 0;
+        double loan_term = 0;
+        double grace_period = 0;
 
         public Form1()
         {
@@ -60,10 +60,27 @@ namespace 視窗二CS324_hw1
         private void button1_Click(object sender, EventArgs e)
 
         {
-            TextBox[] tb = { textBox1, textBox2, textBox3, textBox4 };
-            for (int i = 0; i < 4; i++)
+            TextBox[] tb = { textBox1, textBox2, textBox3, textBox4,textBox5 };
+            for (int i = 0; i < 5; i++)
                 tb[i].BackColor = Color.White;
-   
+            bool isWrongValue = false;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i == 4 && tb[i].Text == "")
+                    continue;
+                if (!double.TryParse(tb[i].Text, out double result))
+                {
+                    label30.Text = "輸入須為整數或浮點數";
+                    tb[i].BackColor = Color.Pink;
+                    isWrongValue = true;
+                }
+            }
+            if (isWrongValue)
+                return;
+                
+
+
+
             bool isNoValue = false;
             for(int i = 0; i < 4; i++)
             {
@@ -88,7 +105,7 @@ namespace 視窗二CS324_hw1
             }
             else
             {
-                if (int.Parse(textBox1.Text) < double.Parse(textBox2.Text))
+                if (double.Parse(textBox1.Text) < double.Parse(textBox2.Text))
                 {
                     textBox1.BackColor = Color.Pink;
                     label30.Text = "房屋總價低於自備款";
@@ -97,24 +114,24 @@ namespace 視窗二CS324_hw1
             }
 
 
-            house_p = int.Parse(textBox1.Text); //房屋總價
+            house_p = double.Parse(textBox1.Text); //房屋總價
             if (isRate)
-                down_payment = house_p *(1- (double.Parse(textBox2.Text)/100)); //自備款比例
+                down_payment = house_p *( (double.Parse(textBox2.Text)/100)); //自備款比例
             else
                 down_payment = double.Parse(textBox2.Text);
             interest_rate = double.Parse(textBox4.Text)/100;  //貸款年利率
-            loan_term = int.Parse(textBox3.Text); //貸款年限
+            loan_term = double.Parse(textBox3.Text); //貸款年限
             if (textBox5.Text == "")
                 grace_period = 0;
             else
-                grace_period = int.Parse(textBox5.Text);  //寬限期
+                grace_period = double.Parse(textBox5.Text);  //寬限期
 
             double principal = house_p - down_payment;
             label12.Text = principal.ToString("N2");  //貸款總金額
 
             double r = interest_rate / 12;
-            int n = loan_term * 12;
-            int g = grace_period * 12;
+            double n = loan_term * 12;
+            double g = grace_period * 12;
             if (grace_period == 0) //無寬限期的算法
             {
                 double _1rn = Math.Pow((1 + r), n);
@@ -178,7 +195,19 @@ namespace 視窗二CS324_hw1
         {
 
             if (e.KeyChar == '.')
-                return;
+            {
+                // 檢查 TextBox 裡是否已經有小數點了
+                // 如果 IndexOf('.') 回傳 -1，代表還沒有點，可以輸入
+                if (textBox1.Text.IndexOf('.') > -1)
+                {
+                    e.Handled = true; // 已經有點了，攔截掉！
+                }
+                else
+                {
+                    return;
+                }
+            }
+            
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 // 如果不是數字也不是控制鍵，就攔截掉 (Handled = true)
@@ -198,6 +227,11 @@ namespace 視窗二CS324_hw1
             };
 
             Process.Start(psi);
+        }
+
+        private void label31_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

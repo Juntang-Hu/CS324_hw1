@@ -71,6 +71,7 @@
             this.label30 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -289,6 +290,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label31);
             this.groupBox2.Controls.Add(this.label29);
             this.groupBox2.Controls.Add(this.label28);
             this.groupBox2.Controls.Add(this.label27);
@@ -536,6 +538,17 @@
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label31.Location = new System.Drawing.Point(91, 451);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(198, 23);
+            this.label31.TabIndex = 24;
+            this.label31.Text = "註：寬限期內/寬限期後";
+            this.label31.Click += new System.EventHandler(this.label31_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -609,6 +622,7 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label31;
     }
 }
 
